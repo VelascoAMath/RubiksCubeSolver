@@ -94,6 +94,9 @@ class Cubie(object):
 			raise Exception(f"{axis} is not a valid axis! Must be x, y, or z!")
 
 		self.pos = np.round(R @ self.pos)
+		self.x = self.pos[0][0]
+		self.y = self.pos[1][0]
+		self.z = self.pos[2][0]
 		for color, v  in self.color_to_dir.items():
 			self.color_to_dir[color] = np.round(R @ v)
 
