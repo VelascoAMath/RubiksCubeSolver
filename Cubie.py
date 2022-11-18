@@ -78,23 +78,21 @@ class Cubie(object):
 			if v[0][0] != 0:
 				p1 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [0.5], [0.5]]) ), color=color_to_vec[color])
 				p2 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [0.5], [-0.5]]) ), color=color_to_vec[color])
-				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [-0.5], [0.5]]) ), color=color_to_vec[color])
-				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [-0.5], [-0.5]]) ), color=color_to_vec[color])
-				Q = quad(vs=[p1,p2,p3,p4])
+				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [-0.5], [-0.5]]) ), color=color_to_vec[color])
+				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [-0.5], [0.5]]) ), color=color_to_vec[color])
 			# Face points up/down
 			elif v[1][0] != 0:
 				p1 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0.5], [0], [0.5]]) ), color=color_to_vec[color])
 				p2 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0.5], [0], [-0.5]]) ), color=color_to_vec[color])
-				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0], [0.5]]) ), color=color_to_vec[color])
-				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0], [-0.5]]) ), color=color_to_vec[color])
-				Q = quad(vs=[p1,p2,p3,p4])
+				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0], [-0.5]]) ), color=color_to_vec[color])
+				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0], [0.5]]) ), color=color_to_vec[color])
 			# Face points left/right
 			elif v[2][0] != 0:
 				p1 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0.5], [0.5], [0]]) ), color=color_to_vec[color])
 				p2 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0.5], [-0.5], [0]]) ), color=color_to_vec[color])
-				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0.5], [0]]) ), color=color_to_vec[color])
-				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [-0.5], [0]]) ), color=color_to_vec[color])
-				Q = quad(vs=[p1,p2,p3,p4])
+				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [-0.5], [0]]) ), color=color_to_vec[color])
+				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0.5], [0]]) ), color=color_to_vec[color])
+			Q = quad(vs=[p1,p2,p3,p4])
 
 
 
