@@ -142,25 +142,44 @@ class Rubik(object):
 		'''
 		Rotates the rubik's cube.
 		Valid moves are U, F, B, D, L, and F.
+		We also allow ' versions (e.g. U', F', etc) and 2 version (U2, F2, etc)
 		param: move - The move you wish to perform
 		'''
 
-		if move not in {"U", "D", "R", "L", "F", "B"}:
+		if move[0] not in {"U", "D", "R", "L", "F", "B"}:
 			raise Exception(f"Unrecognized {move=}!")
 
 		for cube in self.cubie_list:
-			if move == "U" and cube.get_y() == 1:
-				cube.rotate("y", 90)
-			elif move == "D" and cube.get_y() == -1:
-				cube.rotate("y", -90)
-			elif move == "R" and cube.get_z() == 1:
-				cube.rotate("z", 90)
-			elif move == "L" and cube.get_z() == -1:
-				cube.rotate("z", -90)
-			elif move == "F" and cube.get_x() == 1:
-				cube.rotate("x", 90)
-			elif move == "B" and cube.get_x() == -1:
-				cube.rotate("x", -90)
+			axis = None
+			angle = None
+			if move[0] == "U" and cube.get_y() == 1:
+				axis = "y"
+				angle = 90
+			elif move[0] == "D" and cube.get_y() == -1:
+				axis = "y"
+				angle = -90
+			elif move[0] == "R" and cube.get_z() == 1:
+				axis = "z"
+				angle = 90
+			elif move[0] == "L" and cube.get_z() == -1:
+				axis = "z"
+				angle = -90
+			elif move[0] == "F" and cube.get_x() == 1:
+				axis = "x"
+				angle = 90
+			elif move[0] == "B" and cube.get_x() == -1:
+				axis = "x"
+				angle = -90
+
+			if axis is None or angle is None:
+				continue
+			if len(move) == 2 and move[1]=="'":
+				angle *= -1
+			
+			if len(move) == 2 and move[1]=="2":
+				angle *= 2
+
+			cube.rotate(axis, angle)
 
 
 	def render(self):
@@ -175,12 +194,15 @@ class Rubik(object):
 def main():
 	c = Rubik('test1')
 
+	c.rotate("R")
+	c.rotate("R'")
+	c.rotate("L2")
 	# c.rotate("U")
 	# c.rotate("R")
 	# c.rotate("D")
 	# c.rotate("L")
 	# c.rotate("F")
-	c.rotate("B")
+	# c.rotate("B")
 	# c.rotate("U")
 	# c.rotate("R")
 	print(c)
