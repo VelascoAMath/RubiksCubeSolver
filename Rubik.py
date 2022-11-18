@@ -34,7 +34,7 @@ class Rubik(object):
 				read_string.append(l)
 		n = len(read_string) // 3
 
-		Create the cubies
+		# Create the cubies
 		pos_to_cubie = {}
 		for i in range(-1, 2):
 			for j in range(-1, 2):
