@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from vpython import *
 import numpy as np
 
-
+#testing pushing 
 color_to_vec = {
 	"r": vector(1, 0, 0),
 	"w": vector(1, 1, 1),
