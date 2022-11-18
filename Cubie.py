@@ -28,7 +28,9 @@ class Cubie(object):
 	'''
 
 	# x,y,z position of the cubie
-	pos         : np.array = None
+	x           : int = None
+	y           : int = None
+	z           : int = None
 	# Dictionary that maps each color to the norm of the surface on the face
 	color_to_dir: dict     = None
 
@@ -43,6 +45,9 @@ class Cubie(object):
 		param y
 		param z
 		'''
+		self.x = x
+		self.y = y
+		self.z = z
 		self.pos = np.array([[x], [y], [z]])
 
 	def set_color(self, color, x, y, z):
@@ -52,6 +57,24 @@ class Cubie(object):
 		'''
 		self.color_to_dir[color] = np.array([[x], [y], [z]])
 
+
+	def get_x(self):
+		'''
+		Returns the x-coordinate of the position of the cubie
+		'''
+		return self.x
+
+	def get_y(self):
+		'''
+		Returns the x-coordinate of the position of the cubie
+		'''
+		return self.y
+
+	def get_z(self):
+		'''
+		Returns the x-coordinate of the position of the cubie
+		'''
+		return self.z
 
 	def rotate(self, axis, angle):
 
