@@ -1,7 +1,6 @@
 from dataclasses import dataclass
-import numpy as np
-
 from vpython import *
+import numpy as np
 
 
 color_to_vec = {
@@ -29,6 +28,8 @@ class Cubie(object):
 	color_to_dir: dict     = None
 
 
+	def __init__(self):
+		self.color_to_dir = dict()
 
 	def set_position(self, x, y, z):
 		'''
@@ -38,7 +39,6 @@ class Cubie(object):
 		param z
 		'''
 		self.pos = np.array([[x], [y], [z]])
-		self.color_to_dir = dict()
 
 	def set_color(self, color, x, y, z):
 		'''
@@ -78,24 +78,21 @@ class Cubie(object):
 			if v[0][0] != 0:
 				p1 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [0.5], [0.5]]) ), color=color_to_vec[color])
 				p2 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [0.5], [-0.5]]) ), color=color_to_vec[color])
-				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [-0.5], [0.5]]) ), color=color_to_vec[color])
-				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [-0.5], [-0.5]]) ), color=color_to_vec[color])
-				Q = quad(vs=[p1,p2,p3,p4])
+				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [-0.5], [-0.5]]) ), color=color_to_vec[color])
+				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0], [-0.5], [0.5]]) ), color=color_to_vec[color])
 			# Face points up/down
 			elif v[1][0] != 0:
 				p1 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0.5], [0], [0.5]]) ), color=color_to_vec[color])
 				p2 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0.5], [0], [-0.5]]) ), color=color_to_vec[color])
-				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0], [0.5]]) ), color=color_to_vec[color])
-				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0], [-0.5]]) ), color=color_to_vec[color])
-				Q = quad(vs=[p1,p2,p3,p4])
+				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0], [-0.5]]) ), color=color_to_vec[color])
+				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0], [0.5]]) ), color=color_to_vec[color])
 			# Face points left/right
 			elif v[2][0] != 0:
 				p1 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0.5], [0.5], [0]]) ), color=color_to_vec[color])
 				p2 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[0.5], [-0.5], [0]]) ), color=color_to_vec[color])
-				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0.5], [0]]) ), color=color_to_vec[color])
-				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [-0.5], [0]]) ), color=color_to_vec[color])
-				Q = quad(vs=[p1,p2,p3,p4])
-
+				p3 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [-0.5], [0]]) ), color=color_to_vec[color])
+				p4 = vertex(pos=np_to_vector(self.pos + v / 2 + np.array([[-0.5], [0.5], [0]]) ), color=color_to_vec[color])
+			Q = quad(vs=[p1,p2,p3,p4])
 
 
 
