@@ -14,7 +14,12 @@ color_to_vec = {
 
 
 def np_to_vector(x):
-	return vector(x[0][0], x[1][0], x[2][0] )
+	'''
+	Converts an np array in the form [[x], [y], [z]] into a vpython vector
+	param: x - an np array
+	returns: vpython vector
+	'''
+	return vector(x[2][0], x[1][0], x[0][0] )
 
 @dataclass
 class Cubie(object):
@@ -96,16 +101,24 @@ class Cubie(object):
 
 
 
-def main():
-	c = Cubie()
 
-	c.set_position(1, 0, 0)
-	c.set_color('r', 0, 1, 0)
-	c.set_color('w', 0, 0, 1)
-	c.set_color('b', 1, 0, 0)
-	c.rotate("z", 180)
-	print(c)
-	c.render()
+def main():
+	c1 = Cubie()
+	c1.set_position(1, 1, 1)
+	c1.set_color('r', 0, 1, 0)
+	c1.set_color('w', 0, 0, 1)
+	c1.set_color('b', 1, 0, 0)
+	c1.rotate("z", 180)
+	print(c1)
+	c1.render()
+	c2 = Cubie()
+	c2.set_position(-1, -1, -1)
+	c2.set_color('o', 0, -1, 0)
+	c2.set_color('y', 0, 0, -1)
+	c2.set_color('g', -1, 0, 0)
+	c2.rotate("z", 180)
+	print(c2)
+	c2.render()
 
 
 if __name__ == '__main__':
