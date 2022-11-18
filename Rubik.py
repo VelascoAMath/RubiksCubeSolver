@@ -138,14 +138,30 @@ class Rubik(object):
 
 
 
-	def rotate(self, axis, angle):
+	def rotate(self, move):
+		'''
+		Rotates the rubik's cube.
+		Valid moves are U, F, B, D, L, and F.
+		param: move - The move you wish to perform
+		'''
 
-		'''
-		param: axis - The axis of rotation
-		param: angle - The amount (degrees) to rotate the cubie around the origin
-		'''
+		if move not in {"U", "D", "R", "L", "F", "B"}:
+			raise Exception(f"Unrecognized {move=}!")
+
 		for cube in self.cubie_list:
-			cube.rotate(axis, angle)
+			if move == "U" and cube.get_y() == 1:
+				cube.rotate("y", 90)
+			elif move == "D" and cube.get_y() == -1:
+				cube.rotate("y", -90)
+			elif move == "R" and cube.get_z() == 1:
+				cube.rotate("z", 90)
+			elif move == "L" and cube.get_z() == -1:
+				cube.rotate("z", -90)
+			elif move == "F" and cube.get_x() == 1:
+				cube.rotate("x", 90)
+			elif move == "B" and cube.get_x() == -1:
+				cube.rotate("x", -90)
+
 
 	def render(self):
 		'''
@@ -157,9 +173,16 @@ class Rubik(object):
 
 
 def main():
-	c = Rubik('test2')
+	c = Rubik('test1')
 
-	# c.rotate("z", 180)
+	# c.rotate("U")
+	# c.rotate("R")
+	# c.rotate("D")
+	# c.rotate("L")
+	# c.rotate("F")
+	c.rotate("B")
+	# c.rotate("U")
+	# c.rotate("R")
 	print(c)
 	c.render()
 
