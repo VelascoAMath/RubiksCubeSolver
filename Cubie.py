@@ -100,6 +100,12 @@ class Cubie(object):
 		for color, v  in self.color_to_dir.items():
 			self.color_to_dir[color] = np.round(R @ v)
 
+	def __lt__(self, other):
+		'''
+		Note that this does not include the color_to_dir
+		'''
+		return (self.x, self.y, self.z) < (other.x, other.y, other.z)
+
 	def render(self):
 		'''
 		Render the cubie using vpython
@@ -126,6 +132,29 @@ class Cubie(object):
 			Q = quad(vs=[p1,p2,p3,p4])
 
 
+	def __eq__(self, other):
+		if not (self.x == other.x and self.y == other.y and self.z == other.z):
+			return False
+
+		if len(self.color_to_dir) != len(other.color_to_dir):
+			return False
+
+		for color, v in self.color_to_dir.items():
+			if color not in other.color_to_dir or np.any(v != other.color_to_dir[color]):
+				return False
+
+		return True
+
+	def __hash__(self):
+		result = self.x ^ self.y ^ self.z
+
+		for key, val in sorted(self.color_to_dir.items()):
+			result ^= hash(key)
+			result ^= val[0][0]
+			result ^= val[1][0]
+			result ^= val[2][0]
+
+		return int(result)
 
 
 def main():
