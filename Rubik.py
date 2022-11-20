@@ -136,6 +136,8 @@ class Rubik(object):
 				continue
 			self.cubie_list.append(pos_to_cubie[pos])
 
+		self.cubie_list.sort()
+
 
 
 	def rotate(self, move_list):
@@ -184,7 +186,14 @@ class Rubik(object):
 					angle *= 2
 
 				cube.rotate(axis, angle)
+		self.cubie_list.sort()
 
+	def __hash__(self):
+		result_hash = 0
+		for cubie in self.cubie_list:
+			result_hash ^= hash(cubie)
+
+		return result_hash
 
 	def render(self):
 		'''
