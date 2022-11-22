@@ -16,6 +16,9 @@ class Rubik(object):
 
 		self.cubie_list = []
 
+		if file_n is None:
+			return
+
 		# Reading in the input
 		# Should be in this format
 		# www
