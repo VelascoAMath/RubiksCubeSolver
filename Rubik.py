@@ -1,7 +1,7 @@
 from Cubie import Cubie
 from dataclasses import dataclass
 import numpy as np
-
+import copy
 
 @dataclass
 class Rubik(object):
@@ -15,6 +15,9 @@ class Rubik(object):
 	def __init__(self, file_n):
 
 		self.cubie_list = []
+
+		if file_n is None:
+			return
 
 		# Reading in the input
 		# Should be in this format
@@ -136,16 +139,81 @@ class Rubik(object):
 				continue
 			self.cubie_list.append(pos_to_cubie[pos])
 
+		self.cubie_list.sort()
 
 
-	def rotate(self, axis, angle):
 
+	def rotate(self, move_list):
 		'''
-		param: axis - The axis of rotation
-		param: angle - The amount (degrees) to rotate the cubie around the origin
+		Rotates the rubik's cube.
+		Valid moves are U, F, B, D, L, and F.
+		We also allow ' versions (e.g. U', F', etc) and 2 version (U2, F2, etc)
+		param: move - The move you wish to perform
 		'''
-		for cube in self.cubie_list:
-			cube.rotate(axis, angle)
+
+		if isinstance(move_list, str):
+			move_list = [move_list]
+
+		for move in move_list:
+			if move[0] not in {"U", "D", "R", "L", "F", "B"}:
+				raise Exception(f"Unrecognized {move=}!")
+
+			for cube in self.cubie_list:
+				axis = None
+				angle = None
+				if move[0] == "U" and cube.get_y() == 1:
+					axis = "y"
+					angle = 90
+				elif move[0] == "D" and cube.get_y() == -1:
+					axis = "y"
+					angle = -90
+				elif move[0] == "R" and cube.get_z() == 1:
+					axis = "z"
+					angle = 90
+				elif move[0] == "L" and cube.get_z() == -1:
+					axis = "z"
+					angle = -90
+				elif move[0] == "F" and cube.get_x() == 1:
+					axis = "x"
+					angle = 90
+				elif move[0] == "B" and cube.get_x() == -1:
+					axis = "x"
+					angle = -90
+
+				if axis is None or angle is None:
+					continue
+				if len(move) == 2 and move[1]=="'":
+					angle *= -1
+				
+				if len(move) == 2 and move[1]=="2":
+					angle *= 2
+
+				cube.rotate(axis, angle)
+		self.cubie_list.sort()
+
+
+	def rotate_and_return(self, move_list):
+		'''
+		Returns a copy of the cube that has performed a list of moves
+		param: move_list - the list of moves you wish to peform on the cube
+		returns: a cube who performed the operations in move_list
+		'''
+		next_state = copy.deepcopy(self)
+		
+		if isinstance(move_list, str):
+			move_list = [move_list]
+
+		next_state.rotate(move_list)
+		return next_state
+
+
+
+	def __hash__(self):
+		result_hash = 0
+		for cubie in self.cubie_list:
+			result_hash ^= hash(cubie)
+
+		return result_hash
 
 	def render(self):
 		'''
@@ -157,9 +225,10 @@ class Rubik(object):
 
 
 def main():
-	c = Rubik('test2')
+	c = Rubik('test3')
 
-	# c.rotate("z", 180)
+	# c.rotate(["R'", "D'", "R", "D"])
+	c.rotate(["R"])
 	print(c)
 	c.render()
 
