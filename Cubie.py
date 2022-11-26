@@ -146,13 +146,13 @@ class Cubie(object):
 		return True
 
 	def __hash__(self):
-		result = self.x ^ self.y ^ self.z
+		result = int(self.x) ^ int(self.y) ^ int(self.z)
 
 		for key, val in sorted(self.color_to_dir.items()):
 			result ^= hash(key)
-			result ^= val[0][0]
-			result ^= val[1][0]
-			result ^= val[2][0]
+			result ^= int(val[0][0])
+			result ^= int(val[1][0])
+			result ^= int(val[2][0])
 
 		return int(result)
 
