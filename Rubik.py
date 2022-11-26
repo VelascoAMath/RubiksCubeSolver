@@ -1,7 +1,7 @@
 from Cubie import Cubie
 from dataclasses import dataclass
 import numpy as np
-
+import copy
 
 @dataclass
 class Rubik(object):
@@ -191,6 +191,23 @@ class Rubik(object):
 				cube.rotate(axis, angle)
 		self.cubie_list.sort()
 
+
+	def rotate_and_return(self, move_list):
+		'''
+		Returns a copy of the cube that has performed a list of moves
+		param: move_list - the list of moves you wish to peform on the cube
+		returns: a cube who performed the operations in move_list
+		'''
+		next_state = copy.deepcopy(self)
+		
+		if isinstance(move_list, str):
+			move_list = [move_list]
+
+		next_state.rotate(move_list)
+		return next_state
+
+
+
 	def __hash__(self):
 		result_hash = 0
 		for cubie in self.cubie_list:
@@ -208,9 +225,10 @@ class Rubik(object):
 
 
 def main():
-	c = Rubik('test1')
+	c = Rubik('test3')
 
-	c.rotate(["R'", "D'", "R", "D"])
+	# c.rotate(["R'", "D'", "R", "D"])
+	c.rotate(["R"])
 	print(c)
 	c.render()
 
