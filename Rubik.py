@@ -182,7 +182,7 @@ class Rubik(object):
 
 				if axis is None or angle is None:
 					continue
-				if len(move) == 2 and move[1]=="'":
+				if len(move) == 2 and move[1]==";":
 					angle *= -1
 				
 				if len(move) == 2 and move[1]=="2":
@@ -227,7 +227,7 @@ class Rubik(object):
 def main():
 	c = Rubik('test3')
 
-	# c.rotate(["R'", "D'", "R", "D"])
+	# c.rotate(["R;", "D;", "R", "D"])
 	c.rotate(["R"])
 	print(c)
 	c.render()
