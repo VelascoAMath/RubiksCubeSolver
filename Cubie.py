@@ -10,6 +10,7 @@ color_to_vec = {
 	"g": vector(0, 1, 0),
 	"o": vector(1, 0.5, 0),
 	"y": vector(1, 1, 0),
+	"x": vector(0, 0, 0),
 }
 
 
