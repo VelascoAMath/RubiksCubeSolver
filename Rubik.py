@@ -12,7 +12,7 @@ class Rubik(object):
 	# list of cubies
 	cubie_list : list = None
 
-	def __init__(self, file_n):
+	def __init__(self, file_n=None):
 
 		self.cubie_list = []
 
