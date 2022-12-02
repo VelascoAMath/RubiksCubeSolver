@@ -22,6 +22,30 @@ def np_to_vector(x):
 	'''
 	return vector(x[2][0], x[1][0], x[0][0] )
 
+def _direction_to_letter(v):
+	'''
+	Given a np array in the form [[x], [y], [z]], we return a string that represents the direction of the vector
+	param: v - an np array
+	returns: string representation of the vector (e.g. +x, -x, +y, -y, +z, or -z)
+	raises: Exception if v isn't a standard 3D basis vector (i.e. all zeros except for one 1)
+	'''
+	if v[0][0] == 1 and v[1][0] == 0 and v[2][0] == 0:
+		return '+x'
+	elif v[0][0] == -1 and v[1][0] == 0 and v[2][0] == 0:
+		return '-x'
+	elif v[0][0] == 0 and v[1][0] == 1 and v[2][0] == 0:
+		return '+y'
+	elif v[0][0] == 0 and v[1][0] == -1 and v[2][0] == 0:
+		return '-y'
+	elif v[0][0] == 0 and v[1][0] == 0 and v[2][0] == 1:
+		return '+z'
+	elif v[0][0] == 0 and v[1][0] == 0 and v[2][0] == -1:
+		return '-z'
+	else:
+		raise Exception(f"Unrecognized vector {v}! Must be a standard 3D basis vector!")
+
+
+
 @dataclass
 class Cubie(object):
 	'''
@@ -145,6 +169,16 @@ class Cubie(object):
 				return False
 
 		return True
+
+	def __str__(self):
+		
+		color_to_letter = { k:_direction_to_letter(v) for k,v in self.color_to_dir.items() }
+
+		return f"Cubie(pos=({self.x}, {self.y}, {self.z}), color_to_dir={color_to_letter})"
+
+
+	def __repr__(self):
+		return str(self)
 
 	def __hash__(self):
 		result = int(self.x) ^ int(self.y) ^ int(self.z)
