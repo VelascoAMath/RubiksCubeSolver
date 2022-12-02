@@ -89,13 +89,13 @@ class Cubie(object):
 		Adds a color with the norm of the face with that color
 		param color - the color. Should be a string in 'rwbgoy'
 		'''
-		if not isinstance(x, int) or (x != 1 and x != -1):
+		if not isinstance(x, int) or (x != 1 and x != 0 and x != -1):
 			raise Exception(f"Invalid value for x({x})! x must be -1 or 1 (as an integer)")
 
-		if not isinstance(y, int) or (y != 1 and y != -1):
+		if not isinstance(y, int) or (y != 1 and y != 0 and y != -1):
 			raise Exception(f"Invalid value for y({y})! y must be -1 or 1 (as an integer)")
 
-		if not isinstance(z, int) or (z != 1 and z != -1):
+		if not isinstance(z, int) or (z != 1 and z != 0 and z != -1):
 			raise Exception(f"Invalid value for z({z})! z must be -1 or 1 (as an integer)")
 
 		self.color_to_dir[color] = np.array([[x], [y], [z]]).astype(int)
