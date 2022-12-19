@@ -198,8 +198,9 @@ class Rubik(object):
 		param: move_list - the list of moves you wish to peform on the cube
 		returns: a cube who performed the operations in move_list
 		'''
-		next_state = copy.deepcopy(self)
-		
+		next_state = Rubik()
+		next_state.cubie_list = [copy.deepcopy(cubie) for cubie in self.cubie_list]
+
 		if isinstance(move_list, str):
 			move_list = [move_list]
 
