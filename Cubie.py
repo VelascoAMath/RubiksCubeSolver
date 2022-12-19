@@ -209,6 +209,17 @@ class Cubie(object):
 
 		return int(result)
 
+	def __deepcopy__(self, memodict={}):
+		
+		copy_cubie = Cubie()
+		copy_cubie.x = self.x
+		copy_cubie.y = self.y
+		copy_cubie.z = self.z
+		copy_cubie.pos = self.pos.copy()
+		for k,v in self.color_to_dir.items():
+			copy_cubie.color_to_dir[k] = v.copy()
+		return copy_cubie
+
 
 def main():
 	c1 = Cubie()
